@@ -17,9 +17,10 @@ public class Login
     {
         Email = email;
     }
-    
+
     public virtual void CreatePassword(Password password)
     {
-        Password = password;
+        string passwordToHash = Password.ToHash(password);
+        Password = new Password(passwordToHash);
     }
 }

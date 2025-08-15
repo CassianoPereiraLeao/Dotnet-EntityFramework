@@ -20,17 +20,22 @@ public class Password
             throw new ArgumentNullException("A senha não pode ser vazia");
         }
 
-        if (password.Length < 8 || password.Length > 12)
+        if (password.Length < 8)
         {
-            throw new ArgumentException("A senha deve conter entre 8 e 12 caracteres");
+            throw new ArgumentException("A senha deve conter mais de 8 caracteres");
         }
 
-        return BCrypt.Net.BCrypt.HashPassword(password);
+        return password;
+    }
+
+    public static string ToHash(Password password)
+    {
+        return BCrypt.Net.BCrypt.HashPassword(password.ToString());
     }
 
     public bool Verify(string password)
     {
-        return BCrypt.Net.BCrypt.Verify(Value, password);
+        return BCrypt.Net.BCrypt.Verify(password, Value);
     }
 
     public override string ToString()

@@ -39,7 +39,7 @@ app.MapPost("/login", ([FromBody] AdminRequest adminRequest, IAdminService admin
         Password = new Password(adminRequest.Password),
         ConfirmPassword = new Password(adminRequest.ConfirmPassword)
     };
-
+    
     Console.WriteLine(adminDTO.Password);
 
     if (adminService.Login(adminDTO) != null)
